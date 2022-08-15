@@ -1,5 +1,5 @@
 """
-Test for models
+Tests for models.
 """
 from decimal import Decimal
 
@@ -14,11 +14,11 @@ def create_user(email='user@example.com', password='testpass123'):
     return get_user_model().objects.create_user(email, password)
 
 
-class ModelTest(TestCase):
-    """Test models"""
+class ModelTests(TestCase):
+    """Test models."""
 
     def test_create_user_with_email_successful(self):
-        """Test creating a user with an email is successful"""
+        """Test creating a user with an email is successful."""
         email = 'test@example.com'
         password = 'testpass123'
         user = get_user_model().objects.create_user(
@@ -30,11 +30,11 @@ class ModelTest(TestCase):
         self.assertTrue(user.check_password(password))
 
     def test_new_user_email_normalized(self):
-        """Test email normaized for new users."""
+        """Test email is normalized for new users."""
         sample_emails = [
             ['test1@EXAMPLE.com', 'test1@example.com'],
             ['Test2@Example.com', 'Test2@example.com'],
-            ['TEST3@EXAMPLE.COM', 'TEST3@example.com'],
+            ['TEST3@EXAMPLE.com', 'TEST3@example.com'],
             ['test4@example.COM', 'test4@example.com'],
         ]
         for email, expected in sample_emails:
@@ -42,7 +42,7 @@ class ModelTest(TestCase):
             self.assertEqual(user.email, expected)
 
     def test_new_user_without_email_raises_error(self):
-        """Test that creating a user without an email raises a ValueError"""
+        """Test that creating a user without an email raises a ValueError."""
         with self.assertRaises(ValueError):
             get_user_model().objects.create_user('', 'test123')
 
@@ -67,7 +67,7 @@ class ModelTest(TestCase):
             title='Sample recipe name',
             time_minutes=5,
             price=Decimal('5.50'),
-            description='Sample recipe description.',
+            description='Sample receipe description.',
         )
 
         self.assertEqual(str(recipe), recipe.title)
