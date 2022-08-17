@@ -1,7 +1,6 @@
 """
 Serializer for recipe APIs.
 """
-from pkg_resources import require
 from rest_framework import serializers
 
 from core.models import (
@@ -35,7 +34,8 @@ class RecipeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Recipe
-        fields = ['id', 'title', 'time_minutes',
+        fields = [
+            'id', 'title', 'time_minutes',
                   'price', 'link', 'tags', 'ingredients']
         read_only_fields = ['id']
 
@@ -94,7 +94,7 @@ class RecipeDetailSerializer(RecipeSerializer):
         fields = RecipeSerializer.Meta.fields + ['description', 'image']
 
 
-class recipeImageSerializer(serializers.ModelSerializer):
+class RecipeImageSerializer(serializers.ModelSerializer):
     """Serialzer for uploading image to recipes."""
 
     class Meta:
